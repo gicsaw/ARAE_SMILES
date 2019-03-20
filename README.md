@@ -67,11 +67,11 @@ python test_n_CARAE_uncon_logP_SAS_TPSA.py
 
 !Molecular generation for ARAE with QM9 
 
-gen_ARAE_QM9.py
+python gen_ARAE_QM9.py
 
-!Molecular generation for ARAE with ZINC
+#Molecular generation for ARAE with ZINC
 
-gen_ARAE_ZINC.py
+python gen_ARAE_ZINC.py
 
 !Molecular generation for CARAE with ZINC (conditional)
 
