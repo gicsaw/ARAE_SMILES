@@ -64,7 +64,7 @@ python test_n_CARAE_con_logP_SAS_TPSA.py $logP $SAS $TPSA
 
 python test_n_CARAE_uncon_logP_SAS_TPSA.py
 
-#Molecular generation:
+# Molecular generation:
 #Molecular generation for ARAE with QM9 
 
 python gen_ARAE_QM9.py
