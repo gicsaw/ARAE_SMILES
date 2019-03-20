@@ -1,11 +1,10 @@
-from model.CARAE import ARAE
+from model.ARAE import ARAE
 #from utils.utils import *
 import numpy as np
 import os, sys
 import time
 import tensorflow as tf
 import collections
-import copy
 from six.moves import cPickle
 #os.environ["CUDA_VISIBLE_DEVICES"] = ""
 
@@ -42,34 +41,9 @@ sample_size = 100
 seq_length = 110
 dev = 0.0
 
-#input properties, [logP,SAS,TPSA]
-#task_val=np.array([1.5,2,30])
-if len(sys.argv)<=3:
-    print("python gen_CARAE_con_logP_SAS_TPSA logP SAS TPSA ")
-    sys.exit()
 
-logP_set=float(sys.argv[1])
-SAS_set=float(sys.argv[2])
-TPSA_set=float(sys.argv[3])
-task_val=np.array([logP_set,SAS_set,TPSA_set])
-
-print(task_val)
-
-model_name="CARAE_logP_SAS_TPSA"
+model_name="ARAE_ZINC"
 save_dir="./save/"+model_name
-
-out_dir0="out_"+model_name+"G_%d_%d_%d" %(int(logP_set*10),int(SAS_set),int(TPSA_set))
-if not os.path.exists(out_dir0):
-    os.makedirs(out_dir0)
-
-property_task=3
-task_nor=np.array([10.0,10.0,150.0])
-task_low=np.array([-1.0,1.0,0.0])
-task_high=np.array([5.0,8.0,150.0])
-task_low=task_low/task_nor
-task_high=task_high/task_nor
-
-task_val=task_val/task_nor
 
 Ntest=10000
 num_test_batches = int(Ntest/batch_size)
@@ -79,9 +53,12 @@ model = ARAE(vocab_size = vocab_size,
              batch_size = batch_size,
              latent_size = latent_size,
              sample_size = sample_size,
-             property_task = property_task
              )
 
+
+out_dir0="out_"+model_name
+if not os.path.exists(out_dir0):
+    os.makedirs(out_dir0)
 
 total_st=time.time()
 
@@ -97,24 +74,13 @@ for epoch in epochs:
 
     latent_vector_fake=[]
     Y_fake=[]
-    P_fake=[]
     smiles_fake=[]
 
     for itest in range(num_test_batches):
 
-#        fp0.write('**********************************************\n')
+
         decoder_state = model.get_decoder_state()
         s = np.random.normal(0.0, 0.25, [batch_size, sample_size]).clip(-1.0,1.0)
-
-#        p = p_batches2[itest]
-#        cp = np.random.uniform(task_low,task_high, [batch_size, property_task])
-        p=np.empty([batch_size,property_task])
-        p[:,0].fill(task_val[0])
-        p[:,1].fill(task_val[1])
-        p[:,2].fill(task_val[2])
-
-        P_fake.append(p)
-
         latent_vector = model.generate_latent_vector(s)
         latent_vector_fake.append(latent_vector)
 
@@ -124,7 +90,7 @@ for epoch in epochs:
         smiles = ['' for i in range(batch_size)]
         Y=[]
         for i in range(seq_length):
-            m, state = model.generate_molecule(start_token, latent_vector, length, p, decoder_state)
+            m, state = model.generate_molecule(start_token, latent_vector, length, decoder_state)
             decoder_state = state
             start_token = np.argmax(m,2)
             Y.append(start_token[:,0])
@@ -135,12 +101,9 @@ for epoch in epochs:
 
 
     latent_vector_fake=np.array(latent_vector_fake,dtype="float32").reshape(-1,latent_size)
-    P_fake=np.array(P_fake,dtype="float32").reshape(-1,property_task)
     Y_fake=np.array(Y_fake,dtype="int32").reshape(-1,seq_length)
     outfile=out_dir+"/Zfake.npy"
     np.save(outfile,latent_vector_fake)
-    outfile=out_dir+"/Pfake.npy"
-    np.save(outfile,P_fake)
     outfile=out_dir+"/Yfake.npy"
     np.save(outfile,Y_fake)
 
@@ -152,9 +115,5 @@ for epoch in epochs:
     fp_out.close()
 
 total_et=time.time()
-
 print ("total_time : ", total_et-total_st)
-
-
-
 
