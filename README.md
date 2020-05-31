@@ -77,7 +77,7 @@ python gen_ARAE_ZINC.py
 
 python gen_CARAE_con_logP_SAS_TPSA.py  $logP $SAS $TPSA
 
-# $logP=1.0 
+
 
 # References:
 Hong, S. H., Ryu, S., Lim, J., & Kim, W. Y. (2019). Molecular Generative Model Based On Adversarially Regularized Autoencoder. Journal of Chemical Information and Modeling.
