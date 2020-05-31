@@ -70,9 +70,11 @@ python test_n_CARAE_uncon_logP_SAS_TPSA.py
 python gen_ARAE_QM9.py
 
 #Molecular generation for ARAE with ZINC
+
 generated smiles: out_ARAE_QM9/79/smiles_fake.txt
 
 python gen_ARAE_ZINC.py
+
 generated smiles: out_ARAE_ZINC/39/smiles_fake.txt
 
 #Molecular generation for CARAE with ZINC (conditional)
