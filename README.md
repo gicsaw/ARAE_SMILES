@@ -71,11 +71,15 @@ python gen_ARAE_QM9.py
 
 #Molecular generation for ARAE with ZINC
 
-generated smiles: out_ARAE_QM9/79/smiles_fake.txt
+python del_end_code.py out_ARAE_QM9/79
+
+generated smiles: out_ARAE_QM9/79/smiles_gen.txt
 
 python gen_ARAE_ZINC.py
 
-generated smiles: out_ARAE_ZINC/39/smiles_fake.txt
+python del_end_code.py out_ARAE_ZINC/39
+
+generated smiles: out_ARAE_ZINC/39/smiles_gen.txt
 
 #Molecular generation for CARAE with ZINC (conditional)
 
