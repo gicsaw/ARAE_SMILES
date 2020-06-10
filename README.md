@@ -5,7 +5,7 @@ python3
 
 numpy
 
-tensorflow
+tensorflow <=1.13
 
 RDKit
 
@@ -71,13 +71,18 @@ python gen_ARAE_QM9.py
 
 #Molecular generation for ARAE with ZINC
 
+generated smiles: out_ARAE_QM9/79/smiles_fake.txt
+
 python gen_ARAE_ZINC.py
+
+generated smiles: out_ARAE_ZINC/39/smiles_fake.txt
 
 #Molecular generation for CARAE with ZINC (conditional)
 
 python gen_CARAE_con_logP_SAS_TPSA.py  $logP $SAS $TPSA
 
 
-# References:
 
+# References:
+Hong, S. H., Ryu, S., Lim, J., & Kim, W. Y. (2019). Molecular Generative Model Based On Adversarially Regularized Autoencoder. Journal of Chemical Information and Modeling.
 
