@@ -1,5 +1,8 @@
 # ARAE for molecular generation with SMILES representation
 
+# pytorch version (recommand)
+https://github.com/gicsaw/ARAE_torch
+
 # Prerequisite:
 python3
 
