@@ -84,7 +84,7 @@ class ARAE():
         self.latent_vector = self.generator(self.S)
         d_real_logits = self.discriminator(self.mol_encoded)
         d_fake_logits = self.discriminator(self.latent_vector, reuse=True)
-        
+
         self.mol_encoded +=self.N
 
         self.mol_decoded_softmax, mol_decoded_logits = self.total_decoder(self.mol_encoded, mol_onehot)
@@ -154,8 +154,8 @@ class ARAE():
 #            if i!=0 and i!=len(self.disfn)-1:
 #                Y = tf.layers.batch_normalization(Y, name = 'dis_bn_'+str(i), reuse=reuse)
         return Y
-    
-    
+
+
     def generator(self, Z, reuse=False):
         Y=Z
         for i in range(len(self.genfn)):
@@ -326,7 +326,7 @@ class ARAE():
         self.real_latent_vector = tf.placeholder(tf.float32, [self.batch_size, self.latent_size],"real_latent")
         with tf.variable_scope("trials", reuse=reuse):
             self.S_trials = tf.get_variable("trials", initializer=tf.random_uniform([self.batch_size, self.sample_size], -1, 1))
-            self.recover_latent_vector = self.generator(self.S_trials, False,reuse=True)
+            self.recover_latent_vector = self.generator(self.S_trials, reuse=True)
         #Y = tf.nn.l2_normalize(Y, dim=-1)
             self.err_recover = tf.sqrt(tf.reduce_mean(tf.square(self.real_latent_vector-self.recover_latent_vector), -1)+1e-10)
             optimizer = tf.train.AdamOptimizer(0.1)

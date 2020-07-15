@@ -359,7 +359,7 @@ class ARAE():
         self.real_latent_vector = tf.placeholder(tf.float32, [self.batch_size, self.latent_size],"real_latent")
         with tf.variable_scope("trials", reuse=reuse):
             self.S_trials = tf.get_variable("trials", initializer=tf.random_uniform([self.batch_size, self.sample_size], -1, 1))
-            self.recover_latent_vector = self.generator(self.S_trials, False,reuse=True)
+            self.recover_latent_vector = self.generator(self.S_trials, reuse=True)
             self.err_recover = tf.sqrt(tf.reduce_mean(tf.square(self.real_latent_vector-self.recover_latent_vector), -1)+1e-10)
             optimizer = tf.train.AdamOptimizer(0.1)
             self.opt9 = optimizer.minimize(self.err_recover, var_list = [self.S_trials])
