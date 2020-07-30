@@ -71,10 +71,10 @@ model.recover_sample_vector_df(reuse)
 latent_vector_fake=[]
 Y_fake=[]
 smiles_fake=[]
-
-xtest = np.load('data/ZINC/Xtest.npy')
-ytest = np.load('data/ZINC/Ytest.npy')
-ltest = np.load('data/ZINC/Ltest.npy')
+data_dir='data_interpolation'
+xtest = np.load(data_dir+'/Xtest.npy')
+ytest = np.load(data_dir+'/Ytest.npy')
+ltest = np.load(data_dir+'/Ltest.npy')
 x = np.full([batch_size,seq_length], 34, dtype=np.long)
 y = np.full([batch_size,seq_length], 34, dtype=np.long)
 l = np.full([batch_size],0,dtype=np.long)
@@ -91,7 +91,7 @@ s0=model.recover_sample_vector(mol_encoded0)
 Ninterpolation = 1000
 s_interpolation = np.zeros([Ninterpolation,sample_size],dtype=np.float32)
 for i in range(Ninterpolation):
-    s_interpolation[i] = i/1000.0 * s0[0] + (1000.0-i)/1000.0 * s0[1]
+    s_interpolation[i] = (1000.0-i)/1000.0 * s0[0] + i/1000.0 * s0[1]
 num_batches = Ninterpolation//batch_size
 
 for itest in range(num_batches):

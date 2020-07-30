@@ -1,0 +1,3 @@
+#SMILES
+CCOC(=O)[C@@H]1CCCN(C(=O)c2nc(-c3ccc(C)cc3)n3c2CCCCC3)C1
+COc1ccc(C(=O)N(C)[C@@H](C)C/C(N)=N/O)cc1O
