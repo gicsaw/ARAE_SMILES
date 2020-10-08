@@ -54,7 +54,7 @@ seq_length = 109
 dev = 0.2
 
 data_dir ='./dataset/ZINC'
-data_name="train"
+data_name="test"
 if len(sys.argv)>1:
     data_name=sys.argv[1]
 

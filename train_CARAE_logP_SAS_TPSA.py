@@ -23,10 +23,10 @@ def cal_accuracy(S1, S2, length):
 
 def read_data(data_dir,data):
 
-    Xfile=data_dir+"X"+data+".npy"
-    Yfile=data_dir+"Y"+data+".npy"
-    Lfile=data_dir+"L"+data+".npy"
-    Pfile=data_dir+"P"+data+".npy"
+    Xfile=data_dir+"/X"+data+".npy"
+    Yfile=data_dir+"/Y"+data+".npy"
+    Lfile=data_dir+"/L"+data+".npy"
+    Pfile=data_dir+"/P"+data+".npy"
     Xdata=np.load(Xfile)
     Ydata=np.load(Yfile)
     Ldata=np.load(Lfile)
@@ -61,8 +61,8 @@ temperature = 1.0
 min_temperature = 0.5
 decay_rate    = 0.95
 
-data_dir="./data/ZINC/"
-save_dir="./save0/CARAE_logP_SAS_TPSA"
+data_dir="./data/ZINC"
+save_dir="./save/CARAE_logP_SAS_TPSA"
 model_name="CARAE_logP_SAS_TPSA"
 if not os.path.exists(save_dir):
     os.makedirs(save_dir)
