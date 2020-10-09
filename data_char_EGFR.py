@@ -49,9 +49,9 @@ seq_length = 123
 data_dir ='./dataset/EGFR_DUDE'
 data_name = "data"
 
-active_filename = data_dir+"/actives_final.ism"
+active_filename = data_dir+"/actives_canonical.txt"
 data_active = [[x.strip().split()[0], 1] for x in open(active_filename)]
-decoy_filename = data_dir+"/decoys_final.ism"
+decoy_filename = data_dir+"/decoys_canonical.txt"
 data_decoy = [[x.strip().split()[0], 0] for x in open(decoy_filename)]
 data_list = data_active + data_decoy
 num_data = len(data_list)
