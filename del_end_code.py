@@ -12,9 +12,9 @@ def main():
     fp=open(file_name)
     lines=fp.readlines()
     fp.close()
-
-    file_out=data_dir+'smiles_gen.txt'
+    file_out=data_dir+'/smiles_gen.txt'
     fp_out=open(file_out,'w')
+
     for line in lines:
         j=line.find(end_code)
         line_out=line[:j]+'\n'
