@@ -87,7 +87,7 @@ model = ARAE(vocab_size = vocab_size,
 
 total_st=time.time()
 
-epochs=[10]
+epochs=[490]
 
 for epoch in epochs:
     out_dir=out_dir0+"/%d" %epoch
